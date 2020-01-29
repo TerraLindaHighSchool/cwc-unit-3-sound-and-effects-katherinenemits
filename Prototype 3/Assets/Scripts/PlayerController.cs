@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public float gravityModifier;
     public bool isOnGround = true;
+    public bool gameOver = false;
     // allows the player to jump
     void Start()
     {
@@ -27,6 +28,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        isOnGround = true;
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            //checks if player is on the ground
+            isOnGround = true;
+        } else if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            //end statement
+            gameOver = true;
+            Debug.Log("Game Over!");
+        }
     }
 }
